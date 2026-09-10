@@ -1,5 +1,9 @@
 FROM dunglas/frankenphp:1-php8.4
 
+# Set environment variable agar FrankPHP mendengarkan port dari Vercel
+ENV PORT=8000
+ENV SERVER_NAME=":${PORT}"
+
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y zip unzip \
@@ -11,9 +15,11 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
 
+# Atur direktori log dan permission storage
 RUN mkdir -p storage/framework/views storage/framework/sessions storage/framework/cache storage/logs \
     && chmod -R 777 storage bootstrap/cache
 
 EXPOSE 8000
 
-CMD php artisan config:cache && php artisan route:cache && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
+# Jalankan FrankPHP langsung ke folder public Laravel
+CMD frankenphp php-server --listen :$PORT --root public/
