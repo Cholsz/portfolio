@@ -11,6 +11,10 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
 
+# Buat folder storage/logs dan atur permission agar Laravel tidak crash
+RUN mkdir -p storage/framework/views storage/framework/sessions storage/framework/cache storage/logs \
+    && chmod -R 777 storage bootstrap/cache
+
 ENV SERVER_NAME=:80
 
 EXPOSE 80
