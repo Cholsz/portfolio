@@ -1,0 +1,377 @@
+@import 'tailwindcss';
+
+@plugin "daisyui";
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+    --font-mono: 'Fira Code', monospace;
+
+    --color-brand-orange: #E67514;
+    --color-brand-dark: #212121;
+    --color-brand-green: #06923E;
+    --color-brand-light-green: #D3ECCD;
+    --color-brand-yellow: #D8D365;
+}
+
+
+/* ========================================
+   SMOOTH SCROLL
+======================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* ========================================
+   GENERAL REVEAL ANIMATION
+======================================== */
+
+@keyframes reveal-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.reveal.show {
+    animation: reveal-up 0.8s ease-out forwards;
+}
+
+
+/* ========================================
+   STAGGER CARD ANIMATION
+   EXPERIENCE & PROJECT
+======================================== */
+
+.stagger-item {
+    opacity: 0;
+    transform: translateY(25px);
+}
+
+.stagger-item.show {
+    animation: reveal-up 0.7s ease-out forwards;
+}
+
+
+/* Urutan stagger */
+
+.stagger-item:nth-child(1).show {
+    animation-delay: 0.05s;
+}
+
+.stagger-item:nth-child(2).show {
+    animation-delay: 0.15s;
+}
+
+.stagger-item:nth-child(3).show {
+    animation-delay: 0.25s;
+}
+
+.stagger-item:nth-child(4).show {
+    animation-delay: 0.35s;
+}
+
+.stagger-item:nth-child(5).show {
+    animation-delay: 0.45s;
+}
+
+.stagger-item:nth-child(6).show {
+    animation-delay: 0.55s;
+}
+
+.stagger-item:nth-child(7).show {
+    animation-delay: 0.65s;
+}
+
+.stagger-item:nth-child(8).show {
+    animation-delay: 0.75s;
+}
+
+
+
+/* =========================
+   SKILLS - REVEAL
+========================= */
+
+.skill-card {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Muncul satu per satu */
+.skill-card.show {
+    animation: skill-reveal 0.6s ease-out forwards;
+}
+
+@keyframes skill-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================
+   SKILLS - FLOATING
+========================= */
+
+.skill-card.floating {
+    opacity: 1;
+    transform: translateY(0);
+    animation: skill-float 4s ease-in-out infinite;
+}
+
+@keyframes skill-float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* =========================
+   DELAY MUNCUL
+========================= */
+
+.skill-delay-1.show {
+    animation-delay: 0.05s;
+}
+
+.skill-delay-2.show {
+    animation-delay: 0.10s;
+}
+
+.skill-delay-3.show {
+    animation-delay: 0.15s;
+}
+
+.skill-delay-4.show {
+    animation-delay: 0.20s;
+}
+
+.skill-delay-5.show {
+    animation-delay: 0.25s;
+}
+
+.skill-delay-6.show {
+    animation-delay: 0.30s;
+}
+
+.skill-delay-7.show {
+    animation-delay: 0.35s;
+}
+
+.skill-delay-8.show {
+    animation-delay: 0.40s;
+}
+
+.skill-delay-9.show {
+    animation-delay: 0.45s;
+}
+
+.skill-delay-10.show {
+    animation-delay: 0.50s;
+}
+
+.skill-delay-11.show {
+    animation-delay: 0.55s;
+}
+
+.skill-delay-12.show {
+    animation-delay: 0.60s;
+}
+
+.skill-delay-13.show {
+    animation-delay: 0.65s;
+}
+
+.skill-delay-14.show {
+    animation-delay: 0.70s;
+}
+
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .skill-card {
+        opacity: 1;
+        transform: none;
+        animation: none !important;
+    }
+}
+
+
+
+
+/* ========================================
+   HERO FLOATING ANIMATION
+======================================== */
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+    animation: float 3.5s ease-in-out 1s infinite;
+}
+
+.animate-float-slow {
+    animation: float 4s ease-in-out 0.5s infinite;
+}
+
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .reveal,
+    .stagger-item,
+    .skill-card {
+        opacity: 1;
+        transform: none;
+        animation: none !important;
+    }
+
+    .animate-float,
+    .animate-float-delayed,
+    .animate-float-slow {
+        animation: none;
+    }
+}
+
+/* =========================
+   PROJECT CARD
+========================= */
+
+.stagger-item {
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.stagger-item:hover {
+    transform: translateY(-6px);
+}
+
+/* Project image */
+.stagger-item img {
+    transition:
+        transform 0.5s ease,
+        filter 0.5s ease;
+}
+
+.stagger-item:hover img {
+    transform: scale(1.05);
+}
+
+
+/* =========================
+   PREMIUM PROJECT CARD
+========================= */
+
+.stagger-item {
+    will-change: transform;
+}
+
+.stagger-item img {
+    will-change: transform;
+}
+
+
+/* Smooth card interaction */
+
+.stagger-item:hover {
+    transform: translateY(-8px);
+}
+
+
+/* Prevent image from affecting card */
+
+.stagger-item .overflow-hidden {
+    isolation: isolate;
+}
+
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+    .stagger-item,
+    .stagger-item img {
+        transition: none !important;
+    }
+
+    .stagger-item:hover {
+        transform: none;
+    }
+}
+
+
+/* =========================
+   PROJECT CARD
+========================= */
+
+.stagger-item {
+    will-change: transform;
+}
+
+.stagger-item img {
+    will-change: transform;
+}
+
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+    .stagger-item,
+    .stagger-item img {
+        transition: none !important;
+    }
+
+    .stagger-item:hover {
+        transform: none;
+    }
+}
+
+
