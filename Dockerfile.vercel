@@ -11,9 +11,11 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
 
-# Menyiapkan folder storage dan permission
-RUN mkdir -p storage/framework/views storage/framework/sessions storage/framework/cache storage/logs \
+# Pastikan folder penting ada dan beri izin akses penuh
+RUN mkdir -p storage/framework/views storage/framework/sessions storage/framework/cache storage/logs bootstrap/cache \
     && chmod -R 777 storage bootstrap/cache
 
-# Menggunakan sh/bash agar variabel $PORT dari Vercel terbaca secara dinamis
-CMD ["sh", "-c", "php-server --listen :${PORT:-8000} --root public/"]
+# Buka akses untuk file statis seperti favicon.ico
+ENV FRANKENPHP_CONFIG="web_root public/"
+
+CMD ["sh", "-c", "php artisan config:clear && php-server --listen :${PORT:-8000} --root public/"]
