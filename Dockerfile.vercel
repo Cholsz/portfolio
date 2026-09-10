@@ -19,3 +19,11 @@ RUN mkdir -p storage/framework/views storage/framework/sessions storage/framewor
 ENV FRANKENPHP_CONFIG="web_root public/"
 
 CMD ["sh", "-c", "php artisan config:clear && php-server --listen :${PORT:-8000} --root public/"]
+
+# ... instruksi dockerfile sebelumnya ...
+
+# Berikan izin eksekusi ke script startup Anda
+RUN chmod +x /var/www/html/docker-entrypoint.sh
+
+# Jalankan entrypoint
+ENTRYPOINT ["/var/www/html/docker-entrypoint.sh"]
