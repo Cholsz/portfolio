@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# Protect sensitive Laravel files
+<FilesMatch "^(\.env|composer\.(json|lock)|package(-lock)?\.json|vite\.config\.js)$">
+    Require all denied
+</FilesMatch>
+
+# Laravel storage
+RewriteRule ^storage/(.*)$ /storage/app/public/$1 [END]
+
+# Send everything else to Laravel public directory
+RewriteRule (.*) /public/$1 [L]
